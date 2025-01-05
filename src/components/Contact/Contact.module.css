@@ -1,0 +1,25 @@
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 24px;
+}
+
+.contactContainer {
+  display: flex;
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 16px 8px;
+  min-width: 300px;
+  justify-content: space-between;
+}
+
+button {
+  height: 40px;
+  margin: auto 0;
+}
+
+.contactItem {
+  margin: 0;
+  padding: 0;
+}
