@@ -6,6 +6,7 @@ import SearchBox from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
 import { nanoid } from "nanoid";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
 
 let obj = [
   { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
@@ -15,6 +16,11 @@ let obj = [
 ];
 
 const App = () => {
+  const state = useSelector((state) => {
+    return state;
+  });
+  const dispatch = useDispatch();
+  console.log(state);
   const [value, setValue] = useState("");
   const [contacts, setContacts] = useState(() => {
     const storedContacts = localStorage.getItem("contacts");
@@ -46,16 +52,28 @@ const App = () => {
       name: values.name,
       number: values.number,
     };
+    dispatch({
+      type: "contacts/items",
+      payload: newContact,
+    });
     setContacts((prevContacts) => [...prevContacts, newContact]);
     actions.resetForm();
   };
 
   function handleChange(e) {
+    dispatch({
+      type: "filters/name",
+      payload: e.target.value,
+    });
     setValue(e.target.value);
   }
 
   function handleRemove(id) {
     const newList = contacts.filter((contact) => contact.id !== id);
+    dispatch({
+      type: "contacts/items",
+      payload: newList,
+    });
 
     setContacts(newList);
   }
